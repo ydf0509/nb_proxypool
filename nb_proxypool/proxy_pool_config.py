@@ -41,11 +41,11 @@ for g_var in globals_copy:
     if g_var.isupper():
         print(f'最终配置是 {g_var} : {globals()[g_var]}')
 
-REDIS_CLIENT = redis5.from_url(REDIS_URL)
-REDIS_CLIENT.ping()  # 测试账号密码错误没有。
+redis_client = redis5.from_url(REDIS_URL)
+redis_client.ping()  # 测试账号密码错误没有。
 
 # 运行时候的配置写入到redis，免得以后忘了，当初是什么配置参数维护的代理池。
-REDIS_CLIENT.hset('proxy_key_run_config', PROXY_KEY_IN_REDIS_DEFAULT, json.dumps({
+redis_client.hset('proxy_key_run_config', PROXY_KEY_IN_REDIS_DEFAULT, json.dumps({
     'MAX_NUM_PROXY_IN_DB': MAX_NUM_PROXY_IN_DB,
     'MAX_SECONDS_MUST_CHECK_AGAIN': MAX_SECONDS_MUST_CHECK_AGAIN,
     'REQUESTS_TIMEOUT': REQUESTS_TIMEOUT,  # 请求响应时间超过这个值，视为废物代理。
