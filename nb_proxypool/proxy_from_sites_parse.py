@@ -38,7 +38,7 @@ class BaseProxyFromSiteGetter(nb_log.LoggerMixin):
     def _request(self):
         self.resp = MyRequestClient(proxy_name_list=[MyRequestClient.PROXY_FREE,
                                                      MyRequestClient.PROXY_NOPROXY],
-                                    using_platfrom=self.site_name, request_retry_times=6).get(
+                                    using_platfrom=self.site_name, request_retry_times=2).get(
             url=self.url)  # type: SpiderResponse
 
     def _parse(self):
