@@ -4,7 +4,7 @@ from funboost import boost, BrokerEnum, funboost_aps_scheduler
 
 from nb_proxypool.proxy_from_sites_parse import *
 
-from proxy_check import check_one_new_proxy, check_one_exist_proxy, scan_exists_proxy
+from proxy_check import check_one_new_proxy, check_one_exist_proxy, scan_exists_proxy, show_proxy_count
 
 
 @boost('get_proxies_from_sites', broker_kind=BrokerEnum.REDIS, qps=0.5, is_print_detail_exception=False)
@@ -30,11 +30,13 @@ def run_funboost():
                                                         "page": p, "proxy_type": proxy_type})
     '''定时任务扫描存量代理'''
     funboost_aps_scheduler.add_push_job(scan_exists_proxy, 'interval', seconds=30, )
+    funboost_aps_scheduler.add_push_job(show_proxy_count, 'interval', seconds=10, )
 
     get_proxies_from_sites.consume()  # 启动消费代理抓取
     check_one_new_proxy.consume()  # 启动消费检测1个新ip代理
     scan_exists_proxy.consume()  # 启动消费扫描存量代理
     check_one_exist_proxy.consume()  # 消启动费 检测一个旧ip代理
+    show_proxy_count.consume()  # # 消启动费显示代理ip数量
 
     while 1:  # 阻止 funboost_aps_scheduler 守护线程退出
         time.sleep(10)

@@ -12,8 +12,8 @@ from funboost import boost, BrokerEnum, ConcurrentModeEnum
 # CHECK_PROXY_VALIDITY_URL = 'https://www.sohu.com/sohuflash_1.js'
 CHECK_PROXY_VALIDITY_URL = 'https://www.baidu.com/'
 
-logger = nb_log.get_logger('proxy_check')
-
+logger = nb_log.get_logger('proxy_check',log_filename='proxy_check.log')
+logger_proxy_error = nb_log.get_logger('proxy_error',log_filename='proxy_error.log')
 
 @boost('check_one_new_proxy', qps=100, broker_kind=BrokerEnum.REDIS, concurrent_num=300)
 def check_one_new_proxy(proxy_dict, is_save_to_db=True, exist_proxy=False):
@@ -27,7 +27,7 @@ def check_one_new_proxy(proxy_dict, is_save_to_db=True, exist_proxy=False):
                                                                                         verify=False)
         is_valid = True
     except Exception as e:
-        logger.warning(e)
+        logger_proxy_error.warning(e)
         pass
     new_proxy_str = '旧代理' if exist_proxy else '新代理'
     if is_valid:
@@ -51,3 +51,12 @@ def scan_exists_proxy():
     proxy_dict_str_list = get_redis().zrangebyscore(get_redis_key(), 0, time.time() - 5)
     for proxy_dict_str in proxy_dict_str_list:
         check_one_exist_proxy.push(json.loads(proxy_dict_str))
+
+@boost('show_proxy_count', concurrent_mode=ConcurrentModeEnum.SINGLE_THREAD)
+def show_proxy_count():
+    count = get_redis().zcount(get_redis_key(),0,time.time())
+    logger.info(f'当前共有 {count} 个 代理')
+    return count
+
+
+

@@ -27,7 +27,7 @@ class BaseProxyFromSiteGetter(nb_log.LoggerMixin):
         kwargs['proxy_type'] = proxy_type
         self.page = page
         self.kwargs = kwargs
-        self.logger.debug(kwargs)
+        self.logger.debug([self.class_name(),kwargs])
         self._format_the_url()
         self.proxy_list = []  # type: typing.List[str]
         self.proxy_dict_list_valid = []  # type: typing.List[dict]
