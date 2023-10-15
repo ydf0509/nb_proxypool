@@ -2,7 +2,8 @@ import time
 
 from funboost import boost, BrokerEnum, funboost_aps_scheduler
 
-from nb_proxypool.sites.get_proxy_from_sites import *
+from nb_proxypool.proxy_from_sites_parse import *
+
 from proxy_check import check_one_new_proxy, check_one_exist_proxy, scan_exists_proxy
 
 
@@ -11,7 +12,7 @@ def get_proxies_from_sites(site_proxy_cls_name: str, page, proxy_type=1, ):
     get_proxy_getter_cls(site_proxy_cls_name)(page=page, proxy_type=proxy_type).get_proxies()
 
 
-if __name__ == '__main__':
+def run_funboost():
     funboost_aps_scheduler.start()
 
     ''' 定时任务推送代理抓取'''
@@ -37,3 +38,7 @@ if __name__ == '__main__':
 
     while 1:  # 阻止 funboost_aps_scheduler 守护线程退出
         time.sleep(10)
+
+
+if __name__ == '__main__':
+    run_funboost()
