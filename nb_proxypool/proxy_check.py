@@ -9,8 +9,8 @@ from boost_spider import RequestClient
 from nb_proxypool.proxy_pool_config import get_redis, get_redis_key, global_dict
 from funboost import boost, BrokerEnum, ConcurrentModeEnum
 
-CHECK_PROXY_VALIDITY_URL = 'https://www.sohu.com/sohuflash_1.js'
-# CHECK_PROXY_VALIDITY_URL = 'https://www.baidu.com/'
+# CHECK_PROXY_VALIDITY_URL = 'https://www.sohu.com/sohuflash_1.js'
+CHECK_PROXY_VALIDITY_URL = 'https://www.baidu.com/'
 
 logger = nb_log.get_logger('proxy_check')
 
@@ -27,7 +27,7 @@ def check_one_new_proxy(proxy_dict, is_save_to_db=True, exist_proxy=False):
                                                                                         verify=False)
         is_valid = True
     except Exception as e:
-        # print(e)
+        logger.warning(e)
         pass
     new_proxy_str = '旧代理' if exist_proxy else '新代理'
     if is_valid:

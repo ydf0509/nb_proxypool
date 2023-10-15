@@ -2,7 +2,6 @@ import json
 import typing
 import nb_log
 
-from boost_spider import RequestClient
 from boost_spider.http.request_client import SpiderResponse
 
 from pyquery import PyQuery as pq
@@ -21,7 +20,7 @@ class BaseProxyFromSiteGetter(nb_log.LoggerMixin):
     def class_name(cls):
         return str(cls.__name__).split('.')[-1]
 
-    def __init__(self, page=1,proxy_type=None, ):
+    def __init__(self, page=1, proxy_type=None, ):
         self.resp = None
         kwargs = {}
         kwargs['page'] = page
@@ -39,7 +38,8 @@ class BaseProxyFromSiteGetter(nb_log.LoggerMixin):
     def _request(self):
         self.resp = MyRequestClient(proxy_name_list=[MyRequestClient.PROXY_FREE,
                                                      MyRequestClient.PROXY_NOPROXY],
-                                    using_platfrom=self.site_name,request_retry_times=6).get(url=self.url)  # type: SpiderResponse
+                                    using_platfrom=self.site_name, request_retry_times=6).get(
+            url=self.url)  # type: SpiderResponse
 
     def _parse(self):
         """部分网站的通用提取，如果不通用需要重写"""
@@ -145,7 +145,6 @@ class Ip3366(BaseProxyFromSiteGetter):
                 self.proxy_list.append(address_port.replace(' ', ''))
 
 
-
 class Xici(BaseProxyFromSiteGetter):
     site_name = 'xici'
     url_formatter = 'https://www.xicidaili.com/wn/{page}'
@@ -163,7 +162,6 @@ class Xici(BaseProxyFromSiteGetter):
             for address, port in zip(re_ip_address, re_port):
                 address_port = address + ':' + port
                 self.proxy_list.append(address_port.replace(' ', ''))
-
 
 
 class Ip89(BaseProxyFromSiteGetter):
