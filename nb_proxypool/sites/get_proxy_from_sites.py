@@ -69,9 +69,9 @@ class BaseProxyFromSiteGetter(nb_log.LoggerMixin):
             #     self.proxy_dict_list_valid.append(proxy_dict)
 
 
-def get_proxy_getter_kls(site_proxy_kls_name):
-    site_proxy_kls = globals()[site_proxy_kls_name]  # type:type[BaseProxyFromSiteGetter]
-    return site_proxy_kls
+def get_proxy_getter_cls(site_proxy_cls_name):
+    site_proxy_cls = globals()[site_proxy_cls_name]  # type:type[BaseProxyFromSiteGetter]
+    return site_proxy_cls
 
 
 class ZjProxy(BaseProxyFromSiteGetter):
@@ -143,7 +143,7 @@ class Ip3366(BaseProxyFromSiteGetter):
             for address, port in zip(re_ip_address, re_port):
                 address_port = address + ':' + port
                 self.proxy_list.append(address_port.replace(' ', ''))
-        return self.proxy_list
+
 
 
 class Xici(BaseProxyFromSiteGetter):
@@ -163,7 +163,7 @@ class Xici(BaseProxyFromSiteGetter):
             for address, port in zip(re_ip_address, re_port):
                 address_port = address + ':' + port
                 self.proxy_list.append(address_port.replace(' ', ''))
-        return self.proxy_list
+
 
 
 class Ip89(BaseProxyFromSiteGetter):
@@ -296,6 +296,6 @@ class Beesproxy(BaseProxyFromSiteGetter):
 if __name__ == '__main__':
     for p in range(1, 5):
         for proxy_type in (1, 2):
-            get_proxy_getter_kls(Ip89.class_name())(page=p, proxy_type=proxy_type).get_proxies()
+            get_proxy_getter_cls(Ip89.class_name())(page=p, proxy_type=proxy_type).get_proxies()
 
     # print(Beesproxy.class_name())
