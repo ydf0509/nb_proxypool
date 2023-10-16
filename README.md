@@ -11,7 +11,9 @@ nb_proxypool 代理池power by funboost
 ![img.png](img.png)
 
 
-### 2.2 点击运行 nb_proxypool/run_get_and_check_proxy.py
+### 2.2 运行代理自动抓取和超高速并发检测生成redis代理池
+
+点击运行 nb_proxypool/run_get_and_check_proxy.py
 
 
 ## 3 nb_proxypool 代码写法说明
