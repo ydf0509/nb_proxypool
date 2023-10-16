@@ -46,13 +46,13 @@ def check_one_exist_proxy(proxy_dict, is_save_to_db=True):
     return check_one_new_proxy(proxy_dict, is_save_to_db, exist_proxy=True)
 
 
-@boost('scan_exists_proxy', concurrent_mode=ConcurrentModeEnum.SINGLE_THREAD)
+@boost('scan_exists_proxy', broker_kind=BrokerEnum.REDIS,concurrent_mode=ConcurrentModeEnum.SINGLE_THREAD)
 def scan_exists_proxy():
     proxy_dict_str_list = get_redis().zrangebyscore(get_redis_key(), 0, time.time() - 5)
     for proxy_dict_str in proxy_dict_str_list:
         check_one_exist_proxy.push(json.loads(proxy_dict_str))
 
-@boost('show_proxy_count', concurrent_mode=ConcurrentModeEnum.SINGLE_THREAD)
+@boost('show_proxy_count', broker_kind=BrokerEnum.REDIS,concurrent_mode=ConcurrentModeEnum.SINGLE_THREAD)
 def show_proxy_count():
     count = get_redis().zcount(get_redis_key(),0,time.time())
     logger.info(f'当前共有 {count} 个 代理')
