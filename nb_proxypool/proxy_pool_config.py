@@ -5,7 +5,7 @@ from redis5.connection import parse_url
 from funboost.utils import RedisMixin
 
 global_dict = {'PROXY_KEY_IN_REDIS_DEFAULT': 'proxy_free',
-               'REQUESTS_TIMEOUT':5
+               'REQUESTS_TIMEOUT': 5
                }
 
 
