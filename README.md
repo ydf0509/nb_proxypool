@@ -5,6 +5,14 @@ nb_proxypool 代理池power by funboost
 
 ## 2 运行方式
 
+### 2.0 安装依赖
+
+使用了boost_sipder里面的请求类
+
+pip install boost_spider
+
+boost_spider会自动安装funboost.
+
 ### 2.1 配置redis账号
 拉取代码,修改funboost_config.py的redis的账号密码
 
