@@ -1,7 +1,4 @@
-import redis5
 from functools import lru_cache
-
-from redis5.connection import parse_url
 from funboost.utils import RedisMixin
 
 global_dict = {'PROXY_KEY_IN_REDIS_DEFAULT': 'proxy_free',
@@ -10,7 +7,7 @@ global_dict = {'PROXY_KEY_IN_REDIS_DEFAULT': 'proxy_free',
 
 
 @lru_cache()
-def get_redis() -> redis5.Redis:
+def get_redis():
     return RedisMixin().redis_db_frame
 
 
