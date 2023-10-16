@@ -51,6 +51,7 @@ def scan_exists_proxy():
     proxy_dict_str_list = get_redis().zrangebyscore(get_redis_key(), 0, time.time() - 5)
     for proxy_dict_str in proxy_dict_str_list:
         check_one_exist_proxy.push(json.loads(proxy_dict_str))
+    return len(proxy_dict_str_list)
 
 @boost('show_proxy_count', broker_kind=BrokerEnum.REDIS,concurrent_mode=ConcurrentModeEnum.SINGLE_THREAD)
 def show_proxy_count():

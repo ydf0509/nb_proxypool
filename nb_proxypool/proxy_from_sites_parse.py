@@ -148,7 +148,7 @@ class Ip3366(BaseProxyFromSiteGetter):
 class Xici(BaseProxyFromSiteGetter):
     site_name = 'xici'
     url_formatter = 'https://www.xicidaili.com/wn/{page}'
-    support_page = True
+    support_page = False # xici网站太垃圾了,不分页.
 
     find_tr = re.compile('<tr>(.*?)</tr>', re.S)
 
