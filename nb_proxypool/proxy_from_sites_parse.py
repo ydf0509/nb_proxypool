@@ -130,9 +130,6 @@ class Ip3366(BaseProxyFromSiteGetter):
 
     find_tr = re.compile('<tr>(.*?)</tr>', re.S)
 
-    def _format_the_url(self):
-        self.url = self.url_formatter.format(**{'page': self.page, 'proxy_type': self.kwargs['proxy_type']})
-
     def _parse(self):
         trs = self.find_tr.findall(self.resp.text)
         for s in range(1, len(trs)):
