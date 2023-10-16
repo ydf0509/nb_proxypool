@@ -16,7 +16,7 @@ boost_spider会自动安装funboost.
 ### 2.1 配置redis账号
 拉取代码,修改funboost_config.py配置文件的redis的账号密码
 
-![img.png](img.png)
+![img.png](tests/img.png)
 
 
 ### 2.2 运行代理自动抓取和超高速并发检测生成redis代理池
