@@ -2,7 +2,7 @@ import json
 import random
 
 from boost_spider.http.request_client import RequestClient
-from nb_proxypool.proxy_pool_config import get_redis, get_redis_key
+from proxy_pool_config import get_redis, get_redis_key
 
 
 class MyRequestClient(RequestClient):

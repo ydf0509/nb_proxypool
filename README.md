@@ -14,14 +14,14 @@ pip install boost_spider
 boost_spider会自动安装funboost.
 
 ### 2.1 配置redis账号
-拉取代码,修改funboost_config.py的redis的账号密码
+拉取代码,修改funboost_config.py配置文件的redis的账号密码
 
 ![img.png](img.png)
 
 
 ### 2.2 运行代理自动抓取和超高速并发检测生成redis代理池
 
-点击运行 nb_proxypool/run_get_and_check_proxy.py
+点击运行 run_get_and_check_proxy.py
 
 
 ## 3 nb_proxypool 代码写法说明

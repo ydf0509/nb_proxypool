@@ -2,7 +2,7 @@ import time
 
 from funboost import boost, BrokerEnum, funboost_aps_scheduler
 
-from nb_proxypool.proxy_from_sites_parse import *
+from proxy_from_sites_parse import *
 
 from proxy_check import check_one_new_proxy, check_one_exist_proxy, scan_exists_proxy, show_proxy_count
 

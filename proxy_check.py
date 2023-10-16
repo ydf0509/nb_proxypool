@@ -6,7 +6,7 @@ import requests
 import json
 
 from boost_spider import RequestClient
-from nb_proxypool.proxy_pool_config import get_redis, get_redis_key, global_dict
+from proxy_pool_config import get_redis, get_redis_key, global_dict
 from funboost import boost, BrokerEnum, ConcurrentModeEnum
 
 # CHECK_PROXY_VALIDITY_URL = 'https://www.sohu.com/sohuflash_1.js'

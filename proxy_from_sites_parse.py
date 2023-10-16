@@ -7,8 +7,8 @@ from boost_spider.http.request_client import SpiderResponse
 from pyquery import PyQuery as pq
 import re
 
-from nb_proxypool.my_request_client import MyRequestClient
-from nb_proxypool.proxy_check import check_one_new_proxy
+from my_request_client import MyRequestClient
+from proxy_check import check_one_new_proxy
 
 
 class BaseProxyFromSiteGetter(nb_log.LoggerMixin):
