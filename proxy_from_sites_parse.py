@@ -7,7 +7,7 @@ from boost_spider.http.request_client import SpiderResponse
 from pyquery import PyQuery as pq
 import re
 
-from my_request_client import MyRequestClient
+from proxy_request_client import MyRequestClient
 from proxy_check import check_one_new_proxy
 
 

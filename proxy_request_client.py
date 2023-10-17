@@ -5,7 +5,7 @@ from boost_spider.http.request_client import RequestClient
 from proxy_pool_config import get_redis, ProxyGetterConfig
 
 
-class MyRequestClient(RequestClient):
+class ProxyClient(RequestClient):
     def _request_with_free_proxy(self, method, url, verify=None, timeout=None, headers=None, cookies=None, **kwargs):
         """使用redis中的快代理池子,怎么从redis拿代理ip和requests怎么使用代理，用户自己写"""
         res = get_redis().zrange(ProxyGetterConfig.PROXY_KEY_IN_REDIS_DEFAULT, 0, -1)
@@ -27,5 +27,5 @@ class MyRequestClient(RequestClient):
 
 
 if __name__ == '__main__':
-    MyRequestClient(proxy_name_list=[
-        MyRequestClient.PROXY_FREE, MyRequestClient.PROXY_NOPROXY]).get('https://www.kuaidaili.com/free/intr/1')
+    ProxyClient(proxy_name_list=[
+        ProxyClient.PROXY_FREE, ProxyClient.PROXY_NOPROXY],request_retry_times=4).get('https://www.kuaidaili.com/free/intr/1')
