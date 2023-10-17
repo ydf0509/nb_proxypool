@@ -2,15 +2,15 @@ import json
 import random
 
 from boost_spider.http.request_client import RequestClient
-from proxy_pool_config import get_redis, get_redis_key
+from proxy_pool_config import get_redis, ProxyGetterConfig
 
 
 class MyRequestClient(RequestClient):
     def _request_with_free_proxy(self, method, url, verify=None, timeout=None, headers=None, cookies=None, **kwargs):
         """使用redis中的快代理池子,怎么从redis拿代理ip和requests怎么使用代理，用户自己写"""
-        res = get_redis().zrange(get_redis_key(), 0, -1)
+        res = get_redis().zrange(ProxyGetterConfig.PROXY_KEY_IN_REDIS_DEFAULT, 0, -1)
         if len(res) == 0:
-            err_msg = f'request_with_free_proxy redis {get_redis_key()} 键中没有代理ip'
+            err_msg = f'request_with_free_proxy redis {ProxyGetterConfig.PROXY_KEY_IN_REDIS_DEFAULT} 键中没有代理ip'
             self.logger.warning(err_msg)
             raise Exception(err_msg) # 报错是为了换成noproxy重试
         proxies = json.loads(random.choice(res))
