@@ -9,6 +9,7 @@ class ProxyClient(RequestClient):
     def _request_with_free_proxy(self, method, url, verify=None, timeout=None, headers=None, cookies=None, **kwargs):
         """使用redis中的快代理池子,怎么从redis拿代理ip和requests怎么使用代理，用户自己写"""
         res = get_redis().zrange(ProxyGetterConfig.PROXY_KEY_IN_REDIS_DEFAULT, 0, -1)
+        # 低版本redis服务端 没有 ZRANDMEMBER 命令.
         if len(res) == 0:
             err_msg = f'request_with_free_proxy redis {ProxyGetterConfig.PROXY_KEY_IN_REDIS_DEFAULT} 键中没有代理ip'
             self.logger.warning(err_msg)
