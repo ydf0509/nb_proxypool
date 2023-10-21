@@ -1,5 +1,5 @@
 from functools import lru_cache
-from funboost.utils import RedisMixin
+from funboost.utils.redis_manager import RedisMixin
 
 global_dict = {'PROXY_KEY_IN_REDIS_DEFAULT': 'proxy_free',
                'REQUESTS_TIMEOUT': 5
