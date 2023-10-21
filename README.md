@@ -20,7 +20,7 @@ boost_spider会自动安装funboost.
 
 ### 2.2 运行代理自动抓取和超高速并发检测生成redis代理池
 
-点击运行 run.py
+点击运行 run_proxy.py
 
 ## 3 nb_proxypool 代码写法说明
 
