@@ -7,7 +7,7 @@ from boost_spider.http.request_client import SpiderResponse
 from pyquery import PyQuery as pq
 import re
 
-from my_request_client import MyRequestClient
+from proxy_request_client import ProxyClient
 from proxy_check import check_one_new_proxy
 
 
@@ -36,8 +36,8 @@ class BaseProxyFromSiteGetter(nb_log.LoggerMixin):
         self.url = self.url_formatter.format(**self.kwargs)
 
     def _request(self):
-        self.resp = MyRequestClient(proxy_name_list=[MyRequestClient.PROXY_FREE,
-                                                     MyRequestClient.PROXY_NOPROXY],
+        self.resp = ProxyClient(proxy_name_list=[ProxyClient.PROXY_FREE,
+                                                     ProxyClient.PROXY_NOPROXY],
                                     using_platfrom=self.site_name, request_retry_times=2).get(
             url=self.url)  # type: SpiderResponse
 
