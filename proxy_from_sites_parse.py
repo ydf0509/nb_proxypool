@@ -53,7 +53,7 @@ class BaseProxyFromSiteGetter(nb_log.LoggerMixin):
 
     def get_proxies(self):
         if self.support_page is False and self.page > 1:
-            return
+            return []
         self._request()
         if self.resp is not None:
             self._parse()

@@ -27,7 +27,7 @@ def check_one_new_proxy(proxy_dict, is_save_to_db=True, exist_proxy=False):
                                                                                         verify=False)
         is_valid = True
     except Exception as e:
-        logger_proxy_error.warning(e)
+        logger_proxy_error.warning(f'{type(e)} ,{e}')
         pass
     new_proxy_str = '旧代理' if exist_proxy else '新代理'
     if is_valid:
