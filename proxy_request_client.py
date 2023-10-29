@@ -29,4 +29,4 @@ class ProxyClient(RequestClient):
 
 if __name__ == '__main__':
     ProxyClient(proxy_name_list=[
-        ProxyClient.PROXY_FREE, ProxyClient.PROXY_NOPROXY],request_retry_times=4).get('https://www.kuaidaili.com/free/intr/1')
+        ProxyClient.PROXY_FREE, ProxyClient.PROXY_NOPROXY],request_retry_times=4).get('https://www.baidu.com')
